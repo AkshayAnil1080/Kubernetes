@@ -12,8 +12,12 @@ k8-2 -  1.	Install k8
 	9.	Creating replica of a pod
 	10.	Checking deletion and automatic relaunching of Pod
 
-k8-3 -  11.       Lanunching pod via code.
+k8-3 -  11.     Lanunching pod via code.
 
+
+k8-4 -  12.	Replication Controller
+
+k8-5 -  13.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. External LB
 
 # Commands till yet:
 
