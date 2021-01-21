@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: "mydb1"
+ labels:
+   app: hacker
+
+spec:
+ containers:
+ - name: "mydb1"
+   image: "mysql:5.7"
+   env:
+    - name: MYSQL_ROOT_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: p
+    - name: MYSQL_DATABASE
+      value: wpdb
+    - name: MYSQL_USER
+      value: akshay
+    - name: MYSQL_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: mysecret
+          key: q

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+   name: mysecret
+data:
+  p: cmVkaGF0
+  q: YW5pbA==
+
+
+

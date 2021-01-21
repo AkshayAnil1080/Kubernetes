@@ -29,7 +29,22 @@ k8-5 -  16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. Extern
 	6. Verifying NodePort Load balancing via CLI and GUI both.
 
 
-# Commands till yet:
+
+
+k8-7 - 	17.	Launching the DB mySQL via yaml code in KUBERNETES-
+
+	18.	SECRET SERVICE OF K8 via yaml-
+
+		Encoding the confidential Info of DB, like root_passwrod and username, as to use mysql image we have pass four info (MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD) as Environment Variables.
+
+	19.	Extracting the encoded password of secret via CLI –
+		K8’s master server only understands YAML, so pod launched via CLI even first get converted to YAML then passed in to K8 for executing.
+		So, exposing this file will get me the encoded password too and can decode it by base64 conversion.
+
+	20.	Create a secret key via CLI
+		Exploring the help command to get the usage of SECERET in K8 via CLI.
+
+# Commands till yet: 
 
 1. cd "C:\Program Files\Kubernetes\Minikube"
 2. minikube.exe start --driver=virtualbox --kubernetes-version=v1.20.0
@@ -64,7 +79,11 @@ k8-5 -  16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. Extern
 29. kubectl get svc <podName>
 30. kubectl describe svc <podName>
 
-
+kubectl get secrets   						- check the secret file of K8
+kubectl get pods <podanme> -o yaml.				- see the yml code of pod launched
+kubectl get secret mysecret -o yaml				- see the yml code of secret file
+kubectl create -h						- exlplore help for creating anything in K8.
+kubectl create secret generic mys  --from-literal=key=value	- create secret via CLI in K8 and value is decoded with base64 
 
 FAQ:
 K8-1
