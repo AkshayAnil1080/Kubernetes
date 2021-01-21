@@ -1,0 +1,60 @@
+k8 - 2 - 07-01-21
+1. cd "C:\Program Files\Kubernetes\Minikube"
+2. minikube.exe start --driver=virtualbox --kubernetes-version=v1.20.0
+3. minikube status
+4. curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.20.0/bin/windows/amd64/kubectl.exe - download kubectl
+5. kubectl.exe get pods  
+6. kubectl.exe run myweb1 --image=vimal13/apache-webserver-php
+7. kubectl.exe delete pod myweb1
+8. kubectl.exe create deployment myweb1 --image=vimal13/apache-webserver-php
+9. kubectl delete -n default deployment myweb1
+10. kubectl.exe describe pods
+11. minikube dashboard
+12. minikube.exe start/stop
+13. kubectl.exe expose deployments myweb1  --port=80  --type=NodePort - expose the pod to public -PATing
+14. minikube service myweb1 --url
+15. kubectl.exe scale deployment myweb1 --replicas=4
+16. kubectl.exe get deployments
+17. minikube delete all --all
+
+k8 - 3
+18. kubectl.exe delete all --all
+19. in vm : docker ps |  grep vimal13
+20. kubectl.exe create -f pod.yml
+  
+k8 - 4
+21. kubectl get pods -L <labelKeyName>
+22. kubectl get rc   
+23. kubectl describe rc <rcName>
+24. kubectl expose rc <rcName>  --port=80  --type=NodePort
+25. kubectl get services  - loadbalancing perfomed by K8 - clusterIP, NodePort, External LoadBalancer
+26. ifconfig | less 
+27. curl http://IP:Port
+
+k8 - 5
+28. kubectl get svc -    status of services
+29. kubectl get svc <podName>
+30. kubectl describe svc <podName>
+
+k8 - 6
+31. kubectl run mydb –image=mysql:5.7  					- lauch pod with mysql image
+32. kubectl logs mydb							- a troubleshooting way to view the logs in case of environment variables.
+33. kubectl exec -it myos1 -- bash						- login into the pod via CLI
+34. x=4  echo$x								- set temporary env var. lost after logout			
+35. vi /root/.bashrc							- dir to make a permanent env var, but lost after restart
+36. kubectl run myos1 --image=vimal13/apache-webserver-php --env=x=10  - pass env var with command, lost only when pod is deleted
+37. kubectl run mydb --image=mysql:5.7 --env=MYSQL_ROOT_PASSWORD=redhat --env=MYSQL_DATABASE=wpdb --env=MYSQL_USER=akshay --env=MYSQL_PASSWORD=anil
+38. mysql -u <username> -p<password> 					 - login into mysql
+39. SQL commands
+    show databases;
+    use <databaseName>
+    show tables;
+40. kubectl run mywp –image=wordpress:5.1.1-php7.3-apache    		 - launch pod with wordpress image
+  
+
+k8 - 7
+41. kubectl get secrets   						- check the secret file of K8
+42. kubectl get pods <podanme> -o yaml.					- see the yml code of pod launched
+43. kubectl get secret mysecret -o yaml					- see the yml code of secret file
+44. kubectl create -h							- exlplore help for creating anything in K8.
+45. kubectl create secret generic mys  --from-literal=key=value		- create secret via CLI in K8 and value is decoded with base64 

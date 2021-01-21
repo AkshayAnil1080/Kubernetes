@@ -29,20 +29,25 @@ k8-5 -  16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. Extern
 	6. Verifying NodePort Load balancing via CLI and GUI both.
 
 
+k8-6 - 	17.	DEPLOY MULTINODE ARCHITECHTUTE IN K8
+	1.launching one pod in k8 and configuring Wordpress image as fronted.
+	2.launching another pod in K8 and configuring mysql database as backend.
+	3.Exposing the fronthend(NODE PORT in K8) server for public client.
+	4.keeping another OS isolated as the best secuty is avaoid the networking with public world.
+	5.Concept of ENVIRONMENT VARIABLES also known as Shell Variables.
+	6.login into the pod of database via CLI and then login in mysql to view and edit the tables.
 
 
-k8-7 - 	17.	Launching the DB mySQL via yaml code in KUBERNETES-
 
-	18.	SECRET SERVICE OF K8 via yaml-
-
-		Encoding the confidential Info of DB, like root_passwrod and username, as to use mysql image we have pass four info (MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD) as Environment Variables.
-
-	19.	Extracting the encoded password of secret via CLI –
-		K8’s master server only understands YAML, so pod launched via CLI even first get converted to YAML then passed in to K8 for executing.
-		So, exposing this file will get me the encoded password too and can decode it by base64 conversion.
-
-	20.	Create a secret key via CLI
-		Exploring the help command to get the usage of SECERET in K8 via CLI.
+k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
+	19.	SECRET SERVICE OF K8 via yaml-
+			<i>Encoding the confidential Info of DB, like root_passwrod and username, as to use mysql image we have pass four info 
+			(MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD) as Environment Variables.</i>
+	20.	Extracting the encoded password of secret via CLI –
+			<i>K8’s master server only understands YAML, so pod launched via CLI even first get converted to YAML then passed in to K8 for executing.
+			So, exposing this file will get me the encoded password too and can decode it by base64 conversion.</i>
+	21.	Create a secret key via CLI
+			<i>Exploring the help command to get the usage of SECERET in K8 via CLI.</i>
 
 # Commands till yet: 
 
@@ -79,11 +84,28 @@ k8-7 - 	17.	Launching the DB mySQL via yaml code in KUBERNETES-
 29. kubectl get svc <podName>
 30. kubectl describe svc <podName>
 
-kubectl get secrets   						- check the secret file of K8
-kubectl get pods <podanme> -o yaml.				- see the yml code of pod launched
-kubectl get secret mysecret -o yaml				- see the yml code of secret file
-kubectl create -h						- exlplore help for creating anything in K8.
-kubectl create secret generic mys  --from-literal=key=value	- create secret via CLI in K8 and value is decoded with base64 
+k8 - 6
+31. kubectl run mydb –image=mysql:5.7  					
+32. kubectl logs mydb							
+33. kubectl exec -it myos1 -- bash						
+34. x=4  echo$x											
+35. vi /root/.bashrc							
+36. kubectl run myos1 --image=vimal13/apache-webserver-php --env=x=10  
+37. kubectl run mydb --image=mysql:5.7 --env=MYSQL_ROOT_PASSWORD=redhat --env=MYSQL_DATABASE=wpdb --env=MYSQL_USER=akshay --env=MYSQL_PASSWORD=anil
+38. mysql -u <username> -p<password> 					 
+39. SQL commands
+    show databases;
+    use <databaseName>
+    show tables;
+40. kubectl run mywp –image=wordpress:5.1.1-php7.3-apache    		 
+  
+
+k8 - 7
+41. kubectl get secrets   						
+42. kubectl get pods <podanme> -o yaml.					
+43. kubectl get secret mysecret -o yaml					
+44. kubectl create -h							
+45. kubectl create secret generic mys  --from-literal=key=value	
 
 FAQ:
 K8-1
