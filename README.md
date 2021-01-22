@@ -84,7 +84,6 @@ k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 29. kubectl get svc <podName>
 30. kubectl describe svc <podName>
 
-k8 - 6
 31. kubectl run mydb –image=mysql:5.7  					
 32. kubectl logs mydb							
 33. kubectl exec -it myos1 -- bash						
@@ -99,8 +98,6 @@ k8 - 6
     show tables;
 40. kubectl run mywp –image=wordpress:5.1.1-php7.3-apache    		 
   
-
-k8 - 7
 41. kubectl get secrets   						
 42. kubectl get pods <podanme> -o yaml.					
 43. kubectl get secret mysecret -o yaml					
