@@ -1,4 +1,5 @@
 # demos
+<pre>
 k8-1 - INTRODUCTION AND NEED.
 
 k8-2 -  1.	Install k8
@@ -200,5 +201,7 @@ External Load Balancer : if using an external load balancer like using EKS of AW
 ✔32. port is unique number on which a program runs.
 When Program running inside container uses a port number, it is target port.
 Node port is the port number of base OS which has the pod running in it
+
+</pre>
 
 
