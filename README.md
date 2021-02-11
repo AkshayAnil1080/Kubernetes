@@ -1,5 +1,5 @@
 # demos
-
+<pre>
 k8-1 - INTRODUCTION AND NEED.
 
 k8-2 -  1.	Install k8
@@ -49,10 +49,6 @@ k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 			So, exposing this file will get me the encoded password too and can decode it by base64 conversion.</i>
 	21.	Create a secret key via CLI
 			<i>Exploring the help command to get the usage of SECERET in K8 via CLI.</i>
-k8-8 	22. 	Scale in and Scale out via CLI using Deployment
-	23.	Building own docker image and push to docker hub.
-	24.	Update the image on fly while maintining 100 % uptime.
-	25.	To undo the deployment.
 
 # Commands till yet: 
 
@@ -109,26 +105,7 @@ k8-8 	22. 	Scale in and Scale out via CLI using Deployment
 44. kubectl create -h							
 45. kubectl create secret generic mys  --from-literal=key=value	
 
-46. kubectl get rs
-47. kubectl scale deployment myd --replicas=3  -- scale up from 1 - 3
-48. kubectl scale deployment myd --replicas=2  -- scale down from 3 -2
-
-BUILDING DOCKER IMAGE
-mkdir /d-image
-cd /d-image/
-vim Dockerfile
-docker build -t “usernameDockerhub/anyname:version” /d-image/
-docker push “image_name”
-docker run -dit “imagename”
-docker inspect <id_of_container>   - check the ip of container.
-
-NOTE: syntax of image name to be able to push “usernameDockerhub/anyname:version”
-
-50. kubectl set image deployment mydp akshayanil=456793/akshayanil:v2 -- update the version
-51. kubectl rollout undo deployment mydp
-
-## summary
-
+FAQ:
 K8-1
 👉 What is Kubernetes?
 ✔1. it is a tool used for Container management
@@ -225,6 +202,6 @@ External Load Balancer : if using an external load balancer like using EKS of AW
 When Program running inside container uses a port number, it is target port.
 Node port is the port number of base OS which has the pod running in it
 
-
+</pre>
 
 
