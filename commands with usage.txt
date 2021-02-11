@@ -58,3 +58,23 @@ k8 - 7
 43. kubectl get secret mysecret -o yaml					- see the yml code of secret file
 44. kubectl create -h							- exlplore help for creating anything in K8.
 45. kubectl create secret generic mys  --from-literal=key=value		- create secret via CLI in K8 and value is decoded with base64 
+
+
+k8 - 8
+46. kubectl get rs
+47. kubectl scale deployment myd --replicas=3  				-- scale up from 1(intially) - 3
+48. kubectl scale deployment myd --replicas=2  				-- scale down from 3 -2
+
+BUILDING DOCKER IMAGE
+mkdir /d-image
+cd /d-image/
+vim Dockerfile								- case sensitive "Dockerfile"
+docker build -t “usernameDockerhub/anyname:version” /d-image/		- build the image
+docker push “image_name”						- push docker image to docker hub.
+docker run -dit “imagename”						- run the contianer
+docker inspect <id_of_container>   					- check the ip of container.
+
+NOTE: syntax of image name to be able to push “usernameDockerhub/anyname:version”
+
+50. kubectl set image deployment mydp akshayanil=456793/akshayanil:v2	 -- update the version
+51. kubectl rollout undo deployment mydp				 - undo the version update.

@@ -1,5 +1,5 @@
 # demos
-<pre>
+
 k8-1 - INTRODUCTION AND NEED.
 
 k8-2 -  1.	Install k8
@@ -49,6 +49,11 @@ k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 			So, exposing this file will get me the encoded password too and can decode it by base64 conversion.</i>
 	21.	Create a secret key via CLI
 			<i>Exploring the help command to get the usage of SECERET in K8 via CLI.</i>
+k8-8 - 	22.	Scale in and Scala out via CLI using Deployment
+	23.	bulding docker image and push to docker hub
+	24.	Update image in fly with newer version with 100% uptime
+	25.	undo the deployment
+				
 
 # Commands till yet: 
 
@@ -103,8 +108,28 @@ k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 42. kubectl get pods <podanme> -o yaml.					
 43. kubectl get secret mysecret -o yaml					
 44. kubectl create -h							
-45. kubectl create secret generic mys  --from-literal=key=value	
+45. kubectl create secret generic mys  --from-literal=key=value	]
 
+k8 - 8
+
+46. kubectl get rs
+47. kubectl scale deployment myd --replicas=3  				
+48. kubectl scale deployment myd --replicas=2  				
+BUILDING DOCKER IMAGE
+mkdir /d-image
+cd /d-image/
+vim Dockerfile								
+docker build -t “usernameDockerhub/anyname:version” /d-image/		
+docker push “image_name”						
+docker run -dit “imagename”						
+docker inspect <id_of_container>   					
+
+NOTE: syntax of image name to be able to push “usernameDockerhub/anyname:version”
+
+50. kubectl set image deployment mydp akshayanil=456793/akshayanil:v2	
+51. kubectl rollout undo deployment mydp				
+
+<pre>
 FAQ:
 K8-1
 👉 What is Kubernetes?
