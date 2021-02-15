@@ -1,0 +1,68 @@
+1. launch three instance
+2. setting up of master
+	installation of docker
+		1.	yum install docker -y
+		2. 	systemctl enable docker –now
+		3.	docker info
+
+	installation of kubeadm
+		1. 	yum install kubeadm  - fails
+		2. 	vi /etc/yum.repos.d/kubernetes.repo   - need to setup the repo
+		3. 	yum repolist
+		4. 	yum install -y kubelet kubeadm kubectl --disableexcludes=Kubernetes
+		5.	systemctl status kubelet
+		6. 	systemctl enable kubelet –now
+		7.	kubeadm config images pull
+		8.	docker images – docker ps
+		9. 	kubeadm init -h
+		10.	kubeadm init --pod-network-cidr=10.240.0.0./16
+				1st error: [WARNING IsDockerSystemdCheck]: we have to use system instead of cgroups. 
+					vi /etc/docker/daemon.json
+						{
+ 						  "exec-opts": ["native.cgroupdriver=systemd"]
+						}
+					cat /etc/docker/daemon.json
+					systemctl restart docker
+					docker info | grep Driver
+
+				2nd error: [WARNING FileExisting-tc]: tc not found in system path
+					yum install iproute-tc
+
+				3rd error: FileContent—proc-sys-net-bridge-bridge-nf-call-iptables
+					vim /etc/sysctl.d/k8s.conf
+						net.bridge.bridge-nf-call-ip6tables = 1
+						net.bridge.bridge-nf-call-iptables = 1
+
+					cat /etc/sysctl.d/k8s.conf
+					sysctl --system
+					sysctl -a | grep bridge-bridge-nf-call
+
+				4th error: [ERROR NumCPU]: the number of available CPUs 1 is less than the required 2 : resources requirement
+					skip these errors for now
+					 kubeadm init --pod-network-cidr=10.240.0.0/16  --ignore-preflight-errors=NumCPU  --ignore-preflight-errors=Mem
+
+	pods status
+		1.	kubectl get pods - fails firstly - why? - kubectl contact to API : therefore should know the IP, user and port of it. 
+		2.	kubectl get pods -h
+		3.	mkdir -p $HOME/.kube
+		4.	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+		5.	sudo chown $(id -u):$(id -g) $HOME/.kube/config
+		6. 	systemctl status kubectl
+		7. 	kubectl get nodes
+		8.	hostname
+
+
+2 Setting up of Worker
+	same till installation of kubeadm point 6.
+	
+	go to master create a new token..
+		1.	kubeadm token list	
+		2.	ifconfig	 
+		3.	kubeadm token create --print-join-command	   - token created <TOKEN command>	
+
+	go to worker and run <TOKEN command>   - it fails for first time
+		1.	trouble shoot the 1st, 2nd, 3rd error as done in master
+		2. 	<TOKEN command>
+
+	go to master for verification
+		1.	kubectl get nodes
