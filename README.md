@@ -55,6 +55,10 @@ k8-8 - 	22.	Scale in and Scala out via CLI using Deployment
 	25.	undo the deployment
 
 k8-13 - 26.	Multinode CLuster in kuberntes
+k8-14 - 27.	Overlay networking
+	28.	VXLAN
+	29.	Flannel configuration managed by Daemon Set 
+	30.	CoreDNS
 				
 
 # Commands till yet: 
@@ -204,6 +208,24 @@ k8 - 13
 
 </pre>
 
+k8-14. 
+namespace commands - here namespace is "tech"
+52. kubectl create namespace tech
+53. kubectl get namespace
+54. kubectl create deployment --image=vimal13/apache-webserver-php -n tech
+55. kubectl get pods -n tech
+56. kubectl get pod -o wide -n tech 
+57. kubectl expose depoy my --port=80 --type=NodePort -n tech
+
+flannel commands- sets up the coredns too.
+58. cat/var/run/flannel/subnet.env
+59. kubectl get configmap
+60. kubectl get configmap -n kube-system
+61. kubectl edit get kube-flannel-cfg -n kube-system
+62. kubectl describe pod -l app=flannel -n kube-system   - daemon set to manage flannel pod
+63. kubectl get ds -n kube-system  - check desired state => 3
+
+	
 <pre>
 FAQ:
 K8-1
