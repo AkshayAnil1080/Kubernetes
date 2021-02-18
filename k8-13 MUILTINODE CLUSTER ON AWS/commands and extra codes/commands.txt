@@ -10,7 +10,7 @@
 		2. 	vi /etc/yum.repos.d/kubernetes.repo   - need to setup the repo
 		3. 	yum repolist
 		4. 	yum install -y kubelet kubeadm kubectl --disableexcludes=Kubernetes
-		5.	systemctl status kubelet
+		5.	systemctl status kubelet con
 		6. 	systemctl enable kubelet –now
 		7.	kubeadm config images pull
 		8.	docker images – docker ps
@@ -65,4 +65,8 @@
 		2. 	<TOKEN command>
 
 	go to master for verification
-		1.	kubectl get nodes
+		1.	kubectl get nodes 
+
+3 current status of worker node is not ready- launching flannel
+		1. 	kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+			now , staus of worker node is ready.
