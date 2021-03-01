@@ -1,8 +1,9 @@
 # demos
 
-k8-1 - INTRODUCTION AND NEED.
+## k8-1 - INTRODUCTION AND NEED.
 
-k8-2 -  1.	Install k8
+## k8-2 -  
+	1.	Install k8
 	2.	Install kubectl.exe
 	3.	Installing one image in pod
 	4.	Deletion of the pod
@@ -13,15 +14,18 @@ k8-2 -  1.	Install k8
 	9.	Creating replica of a pod
 	10.	Checking deletion and automatic relaunching of Pod
 
-k8-3 -  11.     Lanunching pod via code.
+## k8-3 -  
+	11.     Lanunching pod via code.
 
 
-k8-4 -  12.	Docker container in LAN 
+## k8-4 -  
+	12.	Docker container in LAN 
 	13. 	Replication Controller
 	14.     EXPOSE CONTAINERS TO PUBLIC WORLD
 	15. 	CREATE RPLICAS
 
-k8-5 -  16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. External LB
+## k8-5 -  
+	16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. External LB
 	1. Create a LB code
 	2. Use of LABELS
 	3. Regisetr newly launched Pod under ENDPOINTS OF LB.
@@ -30,7 +34,8 @@ k8-5 -  16.	Types of LoadBalancing(LB) - a. Cluster IP - b. NodePort - c. Extern
 	6. Verifying NodePort Load balancing via CLI and GUI both.
 
 
-k8-6 - 	17.	DEPLOY MULTINODE ARCHITECHTUTE IN K8
+## k8-6 - 	
+	17.	DEPLOY MULTINODE ARCHITECHTUTE IN K8
 	1.launching one pod in k8 and configuring Wordpress image as fronted.
 	2.launching another pod in K8 and configuring mysql database as backend.
 	3.Exposing the fronthend(NODE PORT in K8) server for public client.
@@ -40,7 +45,8 @@ k8-6 - 	17.	DEPLOY MULTINODE ARCHITECHTUTE IN K8
 
 
 
-k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
+## k8-7 - 	
+	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 	19.	SECRET SERVICE OF K8 via yaml-
 			<i>Encoding the confidential Info of DB, like root_passwrod and username, as to use mysql image we have pass four info 
 			(MYSQL_ROOT_PASSWORD, MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD) as Environment Variables.</i>
@@ -49,16 +55,32 @@ k8-7 - 	18.	Launching the DB mySQL via yaml code in KUBERNETES-
 			So, exposing this file will get me the encoded password too and can decode it by base64 conversion.</i>
 	21.	Create a secret key via CLI
 			<i>Exploring the help command to get the usage of SECERET in K8 via CLI.</i>
-k8-8 - 	22.	Scale in and Scala out via CLI using Deployment
+## k8-8 - 	
+	22.	Scale in and Scala out via CLI using Deployment
 	23.	bulding docker image and push to docker hub
 	24.	Update image in fly with newer version with 100% uptime
 	25.	undo the deployment
 
-k8-13 - 26.	Multinode CLuster in kuberntes
-k8-14 - 27.	Overlay networking
-	28.	VXLAN
-	29.	Flannel configuration managed by Daemon Set 
-	30.	CoreDNS
+## k8-13 - 
+	26.	Multinode CLuster in kuberntes
+
+## k8-16
+
+	1. 	Go to master. connect to putty.
+	2.
+	a.	User – create private key
+	b.	Generate CSR from private key
+	c.	Send this CSR to master of cluster
+	d.	Master will sign this CSR(Certificate Signing Request) and CRT(Chinese  reminder Theorem) is generated, the one who signed CSR is called CA(certificate Authority)
+		Q : where is CA present in K8 master ? cd /etc/Kubernetes/pki/ , ls, ca.crt
+		Q: how to create CSR?   In linux kernel based OS, openssl is used.
+	e.	Send this CRT to user.
+	f.	Installing kubectl
+	g.	Client should know where kube-master API running - give API server IP: port , user , pass: certificate/pvt key
+	h.	Client  - > https -> kubemaster – client must have CA crt  to connect to https server
+	i.	Set-credentials
+	j.	Creating user not in k8 master – but in VM local system and have to provide the key based authentication.
+	k.	Need to set context
 				
 
 # Commands till yet: 
@@ -208,8 +230,10 @@ k8 - 13
 
 </pre>
 
-k8-14. 
-namespace commands - here namespace is "tech"
+k8-14
+
+namespace commands - creating namespace is "tech"
+
 52. kubectl create namespace tech
 53. kubectl get namespace
 54. kubectl create deployment --image=vimal13/apache-webserver-php -n tech
@@ -218,6 +242,7 @@ namespace commands - here namespace is "tech"
 57. kubectl expose depoy my --port=80 --type=NodePort -n tech
 
 flannel commands- sets up the coredns too.
+
 58. cat/var/run/flannel/subnet.env
 59. kubectl get configmap
 60. kubectl get configmap -n kube-system
@@ -225,7 +250,34 @@ flannel commands- sets up the coredns too.
 62. kubectl describe pod -l app=flannel -n kube-system   - daemon set to manage flannel pod
 63. kubectl get ds -n kube-system  - check desired state => 3
 
-	
+k8-16
+
+Add user to cluster
+
+64. kubectl cluster-info
+65. openssl genrsa -out akshay-key 1024
+66. openssl req -new -key tango.key -out tango.csr
+67. Manually copying user tango.csr to master vim /etc/Kubernetes/pki/tango.csr
+68. openssl x509 -req -in tango.csr -CA ca.crt -CAkey ca.key -out tango.crt
+69. openssl    x509    -req -in tango.csr   -CA ca.crt   -CAkey ca.key   -CAcreateserial   -out tango.crt
+70. copy the master vim /etc/Kubernetes/pki/tango.crt to local user vim /kube_ws/tango.crt
+71. cat <<EOF > /etc/yum.repos.d/kubernetes.repo 
+<pre>
+	[kubernetes] 
+	name=Kubernetes baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64 enabled=1 
+	gpgcheck=1 
+	repo_gpgcheck=1
+	gpgkgey=https://packages.cloud.google.com/yum/doc/yum-key.gpg httpsg//packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+	EOF
+</pre>
+
+72. yum install -y kubectl
+73. kubectl config view
+74. kubectl  config  --kubeconfig  tango.kubeconfig  set-cluster myawkubecluster --server https://100.25.16.242:6443 --certificate-authority=ca.crt
+75. kubectl config --kubeconfig tango.kubeconfig set-credentials  tango --client-certificate tango.crt --client-key tango.key
+76. kubectl config view --kubeconfig tango.kubeconfig
+
+		
 <pre>
 FAQ:
 K8-1
